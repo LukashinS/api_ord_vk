@@ -52,7 +52,7 @@ def get_list(value):
 
 
 if __name__ == '__main__':
-    # person_list = get_list(person_url)
+    person_list = get_list(person_url)
     # contract_list = get_list(contract_url)
     # creative_list = get_list(creative_url)
     # pad_list = get_list(pad_url)
