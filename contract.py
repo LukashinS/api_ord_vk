@@ -9,5 +9,8 @@ class Contract(BaseMethods):
         self.path = "v1/contract"
 
     def search_contracts_by_comment(self, comment):
+        """Поиск договора по комментарию
+              :param comment: Комментарий
+              """
         contract_lst = self.get_list()
         return list(filter(lambda x: x["comment"] == comment, contract_lst))

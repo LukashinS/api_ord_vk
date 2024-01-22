@@ -20,6 +20,8 @@ class ApiClient:
         self.data = {'offset': '0', 'limit': '100'}
 
     def get(self, url):
+        """GET - Чтение"""
+
         urllib3.disable_warnings()
         response = urllib3.request(
             "GET",
@@ -28,6 +30,7 @@ class ApiClient:
         return response
 
     def put(self, url, params):
+        """PUT - Запись"""
         urllib3.disable_warnings()
         headers = {"Content-Type": self.accept}
         headers.update(**self.headers)

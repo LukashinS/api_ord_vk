@@ -1,9 +1,8 @@
 from core import BaseMethods
 from contract import Contract
 from typing import List
-import hashlib
-import os
 from datetime import datetime
+from helpers import sha256sum
 
 
 class Creative(BaseMethods):
@@ -49,18 +48,12 @@ class Creative(BaseMethods):
         contract_external_id = contract_lst[0]['external_id']
         params['contract_external_id'] = contract_external_id
         if file_name:
-            params['media_external_ids'] = [self.sha256sum(file_name)]
+            params['media_external_ids'] = [sha256sum(file_name)]
         else:
             params['media_external_ids'] = []
 
         external_id = str(datetime.now().timestamp()).replace(".", "_")
         url = self.get_url(self.path_v2, external_id)
         response = self.api_client.put(url, params)
+
         return response.json()
-
-    @staticmethod
-    def sha256sum(filename):
-        """SHA256 File Checksum"""
-
-        with open(filename, 'rb', buffering=0) as f:
-            return hashlib.file_digest(f, 'sha256').hexdigest()
