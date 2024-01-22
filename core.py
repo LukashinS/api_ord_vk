@@ -2,17 +2,17 @@ from api import ApiClient
 import config
 
 BASE_URL = config.BASE_URL
-TOKEN = config.TOKEN
 
 
 class BaseMethods:
     def __init__(self, path=""):
-        self.api_client = ApiClient(TOKEN)
+        self.api_client = ApiClient()
         self.base_url = BASE_URL
         self.path = path
 
     def get_url(self, *args):
         """Генерация url'а запроса"""
+
         return '/'.join([self.base_url] + list(args))
 
     def get_list(self):
