@@ -1,14 +1,12 @@
 import urllib3
 import config
 
-TOKEN = config.TOKEN
-
 
 class ApiClient:
     """Класс для работы с GET/PUT/POST запросами"""
 
     def __init__(self):
-        self.TOKEN = TOKEN
+        self.TOKEN = config.TOKEN
         self.authorization = f'Bearer {self.TOKEN}'
         self.accept = 'application/json'
         self.user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 YaBrowser/23.11.0.0 Safari/537.36"
