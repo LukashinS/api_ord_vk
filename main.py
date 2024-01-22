@@ -1,29 +1,33 @@
 import config
-from api import BaseMethods
-
-BASE_URL = config.BASE_URL
-TOKEN = config.TOKEN
+from person import Person
+from contract import Contract
+from creative import Creative
+from pad import Pad
+from statistics import Statistics
 
 
 if __name__ == '__main__':
 
-    main = BaseMethods(config.BASE_URL, config.TOKEN)
-
     print(f"Включен режим - {'PROD' if config.PROD else 'DEV'}")
 
-    person_list = main.get_list(main.person_url)
+    person = Person()
+    person_list = person.get_list()
     print(person_list)
 
-    contract_list = main.get_list(main.contract_url)
+    contract = Contract()
+    contract_list = contract.get_list()
     print(contract_list)
 
-    creative_list = main.get_list(main.creative_url)
+    creative = Creative()
+    creative_list = creative.get_list()
     print(creative_list)
 
-    pad_list = main.get_list(main.pad_url)
+    pad = Pad()
+    pad_list = pad.get_list()
     print(pad_list)
 
-    statistics_list = main.get_statistics_list()
+    statistics = Statistics()
+    statistics_list = statistics.get_list()
     print(statistics_list)
 
     print("Все!")
