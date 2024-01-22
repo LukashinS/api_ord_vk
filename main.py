@@ -1,8 +1,10 @@
 import urllib3
 import config
 
-bearer = "Bearer"
+BASE_URL = config.BASE_URL
 TOKEN = config.TOKEN
+
+bearer = "Bearer"
 authorization = f'{bearer} {TOKEN}'
 accept = 'application/json'
 user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 YaBrowser/23.11.0.0 Safari/537.36"
@@ -13,17 +15,17 @@ headers = {
     # "User-Agent": user_agent
 }
 data = {'offset': '0', 'limit': '100'}
-base_url = "https://api.ord.vk.com"
 
 
 def get_url(base, *args):
     return '/'.join([base] + list(args))
 
 
-person_url = get_url(base_url, "v1/person")
-contract_url = get_url(base_url, "v1/contract")
-creative_url = get_url(base_url, "v1/creative")
-pad_url = get_url(base_url, "v1/pad")
+person_url = get_url(BASE_URL, "v1/person")
+contract_url = get_url(BASE_URL, "v1/contract")
+creative_url = get_url(BASE_URL, "v1/creative")
+pad_url = get_url(BASE_URL, "v1/pad")
+statistics_url = get_url(BASE_URL, "v1/statistics/list")
 
 
 def get(url):
@@ -36,7 +38,8 @@ def get(url):
 
 
 def get_list(value):
-    """Получение списка"""
+    """Получение списка
+       Контрагенты/Договоры/Креативы/Площадки"""
 
     response = get(value)
     external_ids = response.json().get("external_ids")
@@ -51,9 +54,31 @@ def get_list(value):
     return result
 
 
+def get_statistics_list():
+    """Получение списка Статистики"""
+
+    response = get(statistics_url)
+    items = response.json().get("items")
+
+    return items
+
+
 if __name__ == '__main__':
-    person_list = get_list(person_url)
+    print(f"Включен режим - {'PROD' if config.PROD else 'DEV'}")
+
+    # person_list = get_list(person_url)
+    # print(person_list)
+    #
     # contract_list = get_list(contract_url)
+    # print(contract_list)
+    #
     # creative_list = get_list(creative_url)
+    # print(creative_list)
+    #
     # pad_list = get_list(pad_url)
+    # print(pad_list)
+
+    statistics_list = get_statistics_list()
+    print(statistics_list)
+
     print("Все!")
