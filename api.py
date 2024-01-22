@@ -26,3 +26,14 @@ class ApiClient:
             url=url,
             headers=self.headers)
         return response
+
+    def put(self, url, params):
+        urllib3.disable_warnings()
+        headers = {"Content-Type": self.accept}
+        headers.update(**self.headers)
+        response = urllib3.request(
+            "PUT",
+            url=url,
+            headers=headers,
+            json=params)
+        return response

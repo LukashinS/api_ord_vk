@@ -27,5 +27,7 @@ class BaseMethods:
             url = self.get_url(self.path, external_id)
             response = self.api_client.get(url)
             if response:
-                result.append(response.json())
+                r_json = response.json()
+                r_json['external_id'] = external_id
+                result.append(r_json)
         return result
