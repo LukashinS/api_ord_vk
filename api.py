@@ -5,7 +5,7 @@ TOKEN = config.TOKEN
 
 
 class ApiClient:
-    """Класс для работы с GET/POST запросами"""
+    """Класс для работы с GET/PUT/POST запросами"""
 
     def __init__(self):
         self.TOKEN = TOKEN
@@ -31,6 +31,7 @@ class ApiClient:
 
     def put(self, url, params):
         """PUT - Запись"""
+
         urllib3.disable_warnings()
         headers = {"Content-Type": self.accept}
         headers.update(**self.headers)
