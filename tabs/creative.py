@@ -1,5 +1,5 @@
 from core import BaseMethods
-from contract import Contract
+from tabs.contract import Contract
 from typing import List
 from datetime import datetime
 from helpers import sha256sum

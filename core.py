@@ -1,3 +1,4 @@
+import helpers
 from api import ApiClient
 import config
 
@@ -31,3 +32,10 @@ class BaseMethods:
                 r_json['external_id'] = external_id
                 result.append(r_json)
         return result
+
+    def record_list_to_xls(self, path_to_json="list.json", path_to_xls="list.xlsx"):
+        """Запись списка в Excel файл"""
+
+        result = self.get_list()
+        helpers.save_to_json(result, path_to_json)
+        helpers.save_json_to_xls(path_to_json, path_to_xls)

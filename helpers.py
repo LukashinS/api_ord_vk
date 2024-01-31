@@ -1,4 +1,19 @@
 import hashlib
+import pandas as pd
+import json
+
+
+def save_to_json(json_data, path_to_json):
+    """Сохраняет json в файл"""
+
+    with open(path_to_json, 'w', encoding="utf-8") as f:
+        json.dump(json_data, f, ensure_ascii=False)
+
+
+def save_json_to_xls(path_to_json, path_to_xls):
+    """Сохраняет json в файл Excel"""
+
+    pd.read_json(path_to_json).to_excel(path_to_xls)
 
 
 def sha256sum(filename):
