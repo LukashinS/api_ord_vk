@@ -1,6 +1,7 @@
 import hashlib
 import pandas as pd
 import json
+from datetime import datetime
 
 
 def save_to_json(json_data, path_to_json):
@@ -21,3 +22,11 @@ def sha256sum(filename):
 
     with open(filename, 'rb', buffering=0) as f:
         return hashlib.file_digest(f, 'sha256').hexdigest()
+
+
+def generate_external_id(head_id):
+    """Генерирует external_id
+    :param head_id: id с которого будет начинаться новый id
+    """
+
+    return f'{head_id}-{str(datetime.now().timestamp()).replace(".", "_")}'

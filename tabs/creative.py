@@ -1,8 +1,7 @@
 from core import BaseMethods
 from tabs.contract import Contract
 from typing import List
-from datetime import datetime
-from helpers import sha256sum
+from helpers import sha256sum, generate_external_id
 
 
 class Creative(BaseMethods):
@@ -52,7 +51,7 @@ class Creative(BaseMethods):
         else:
             params['media_external_ids'] = []
 
-        external_id = str(datetime.now().timestamp()).replace(".", "_")
+        external_id = generate_external_id(contract_external_id)
         url = self.get_url(self.path_v2, external_id)
         response = self.api_client.put(url, params)
 
